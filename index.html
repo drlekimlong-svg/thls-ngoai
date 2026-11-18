@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Thực tập Ngoại khoa</title>
-<meta name="description" content="Lối vào ứng dụng khám sáng Y6, Y3 và tài liệu, biểu mẫu chung của đợt thực tập lâm sàng Ngoại khoa.">
+<meta name="description" content="Lối vào ứng dụng khám sáng Y6, Y3, ôn tập trắc nghiệm, chấm Mini-CEX và tài liệu, biểu mẫu chung của đợt thực tập lâm sàng Ngoại khoa.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#16365c">
 <link rel="manifest" href="manifest.webmanifest">
@@ -105,6 +105,27 @@ header.dau {
 .the-ud.y6 { --mau: var(--y6); --mau-nen: var(--y6-nen); }
 .the-ud.y3-ndgd { --mau: var(--y3n); --mau-nen: var(--y3n-nen); }
 .the-ud.y3-an-binh { --mau: var(--y3a); --mau-nen: var(--y3a-nen); }
+
+/* Ứng dụng ôn tập và chấm điểm */
+.ds-hoc { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+.the-hoc {
+  display: flex; gap: 14px; align-items: flex-start; text-decoration: none; background: var(--mat);
+  border: 1px solid var(--vien); border-radius: var(--bo); padding: 16px; box-shadow: var(--bong);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.the-hoc:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(16, 30, 54, .12); }
+.the-hoc:focus-visible { outline: 3px solid var(--chinh); outline-offset: 2px; }
+.the-hoc .bieu-hoc {
+  flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--chinh-nhat); color: var(--chinh);
+}
+.the-hoc .noi { flex: 1; min-width: 0; }
+.the-hoc .nhan { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--chu-3); }
+.the-hoc h3 { margin: 2px 0 4px; font-size: 17px; line-height: 1.3; }
+.the-hoc .mt { margin: 0 0 8px; font-size: 14px; color: var(--chu-2); }
+.the-hoc .khoa { margin: 0; display: flex; gap: 6px; align-items: flex-start; font-size: 13px; color: var(--chu-3); }
+.the-hoc .khoa svg { flex: none; margin-top: 2px; }
+.the-hoc .mo { flex: none; align-self: center; color: var(--chinh); }
 
 .ghi-chu-dn {
   margin: 16px 0 0; padding: 12px 14px; background: var(--mat); border: 1px solid var(--vien); border-radius: 12px;
@@ -213,6 +234,7 @@ footer .khung { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: cen
   .ung-dung { grid-template-columns: 1fr; }
   .the-ud { min-height: 0; }
   .ds-tl { grid-template-columns: 1fr; }
+  .ds-hoc { grid-template-columns: 1fr; }
   .hd-luoi { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
@@ -220,6 +242,9 @@ footer .khung { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: cen
   .chon-lop-khung .nhan { display: none; }
   .chon-lop { gap: 5px; }
   .chon-lop button { font-size: 13px; padding: 6px 8px; }
+  .the-hoc { padding: 14px; gap: 12px; }
+  .the-hoc .bieu-hoc { width: 38px; height: 38px; }
+  .the-hoc .mo { display: none; }
   .tl { padding: 12px; gap: 12px; }
   .tl .bieu { width: 38px; height: 46px; }
   .tl .nut { margin-left: 0; width: 100%; }
@@ -270,7 +295,7 @@ footer .khung { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: cen
 /* In: chỉ in phần hướng dẫn */
 @media print {
   body { background: #fff; color: #000; font-size: 12pt; }
-  header.dau, #ung-dung, .ghi-chu-dn, .chon-lop-khung, #tai-lieu, #khoa-tl, footer, .hang-nut, .toast { display: none !important; }
+  header.dau, #ung-dung, #ung-dung-hoc, .ghi-chu-dn, .chon-lop-khung, #tai-lieu, #khoa-tl, footer, .hang-nut, .toast { display: none !important; }
   section.muc { margin: 0; }
   .hd-the { border: 1px solid #999; break-inside: avoid; }
   .hd-luoi { grid-template-columns: 1fr; }
@@ -284,7 +309,7 @@ footer .khung { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: cen
   <div class="khung">
     <p class="nho">Thực tập lâm sàng Ngoại khoa</p>
     <h1>Lối vào chung cho các lớp</h1>
-    <p class="phu">Bấm vào lớp và bệnh viện của em để mở ứng dụng khám sáng. Tài liệu, biểu mẫu và hướng dẫn đầu đợt ở phía dưới.</p>
+    <p class="phu">Bấm vào lớp và bệnh viện của em để mở ứng dụng khám sáng. Ứng dụng ôn tập, chấm Mini-CEX và tài liệu, hướng dẫn đầu đợt ở phía dưới.</p>
   </div>
 </header>
 
@@ -296,6 +321,14 @@ footer .khung { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: cen
       <span>Đăng nhập bằng <b>MSSV</b> và <b>mã cá nhân</b> trong email trường gửi em. Không thấy email thì xem mục Thư rác, vẫn không có thì nhắn giảng viên. Mã chỉ dùng cho riêng em. Giảng viên và BSNT đăng nhập bằng mã GV.</span>
     </p>
   </div>
+
+  <section class="muc" id="ung-dung-hoc" aria-labelledby="tieu-hoc">
+    <div class="khung">
+      <h2 id="tieu-hoc">Ôn tập và chấm điểm</h2>
+      <p class="dan">Ứng dụng của học phần Ngoại Y3. Mỗi ứng dụng có mật khẩu riêng, không dùng mã tài liệu bên dưới.</p>
+      <div class="ds-hoc" id="ds-hoc"></div>
+    </div>
+  </section>
 
   <section class="muc" id="khoa-tl" aria-labelledby="tieu-khoa">
     <div class="khung">
@@ -417,6 +450,34 @@ footer .khung { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: cen
     a.setAttribute('aria-label', 'Vào ứng dụng khám sáng ' + u.lop + ' ' + u.co_so);
     a.addEventListener('click', function () { luu(KHOA, u.ma); });
     vung.appendChild(a);
+  });
+
+  // 1b. Ứng dụng ôn tập và chấm điểm (mở tự do, mỗi ứng dụng có mật khẩu riêng)
+  var SVG = function (d) {
+    return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
+  };
+  var BIEU_HOC = {
+    'on-tap-dau-hieu': SVG('<path d="M9 11l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/>'),
+    'minicex': SVG('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.8h6V4M8.5 10h7M8.5 14h7M8.5 18h4"/>')
+  };
+  var SVG_KHOA = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+  var SVG_MUI_TEN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var hoc = D.ung_dung_hoc || [];
+  if (!hoc.length) document.getElementById('ung-dung-hoc').hidden = true;
+  hoc.forEach(function (u) {
+    var khoa = e('p', { class: 'khoa', html: SVG_KHOA }, [e('span', { text: u.khoa })]);
+    var a = e('a', { class: 'the-hoc', href: u.url, rel: 'noopener' }, [
+      e('span', { class: 'bieu-hoc', html: BIEU_HOC[u.ma] || BIEU_HOC['on-tap-dau-hieu'] }),
+      e('div', { class: 'noi' }, [
+        e('span', { class: 'nhan', text: u.nhan }),
+        e('h3', { text: u.ten }),
+        e('p', { class: 'mt', text: u.mo_ta }),
+        khoa
+      ]),
+      e('span', { class: 'mo', html: SVG_MUI_TEN })
+    ]);
+    a.setAttribute('aria-label', 'Mở ứng dụng ' + u.ten);
+    document.getElementById('ds-hoc').appendChild(a);
   });
 
   // 2. Nút chọn lớp
